@@ -38,7 +38,7 @@ const SignupUser=()=>{
         if(response.status===201){
             const resdata=response.data
             dispatch(login(resdata))
-            localStorage.setItem('accesstoken',JSON.stringify(resdata.token))
+            localStorage.setItem('accesstoken',resdata.token)
             navigate('/userhome')
             console.log(resdata)
         }

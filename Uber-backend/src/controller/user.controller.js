@@ -6,7 +6,7 @@ import addblacklist from '../services/blacklist.service.js'
 
 
 async function registerusercontroller(req,res,next){
-          //  console.log("this is login body",req.body)
+           console.log("this is login body",req.body)
           const error=validationResult(req)
           if(!error.isEmpty()){
                return res.status( 400).json({errors:error.array()})
@@ -21,6 +21,7 @@ async function registerusercontroller(req,res,next){
 
           const userc=await createuser({firstname:fullname.firstname,lastname:fullname.lastname,email,password})
           const token=await userc.getAccesstoken()
+          console.log(token)
           const options={
                httpOnly:true,
                 secure:false
@@ -31,6 +32,7 @@ async function registerusercontroller(req,res,next){
 }
 
 async function loginusercontroller(req,res,next){
+     console.log("hi")
      const error=validationResult(req)
      console.log(error)
      if(!error.isEmpty()){
@@ -48,6 +50,7 @@ async function loginusercontroller(req,res,next){
         return  res.status(400).json("invalid password")
     }
     const token=await user.getAccesstoken();
+    console.log(token)
     const options={
      httpOnly:true,
      secure:false

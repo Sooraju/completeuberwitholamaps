@@ -64,7 +64,8 @@ const captionSchema=new Schema(
                   },
                 coordinates: {
                 type: [Number], // [longitude, latitude]
-                required: true
+                default: [0, 0]
+                // required: true
                 }
             }
     

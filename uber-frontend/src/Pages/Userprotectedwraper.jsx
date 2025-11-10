@@ -4,7 +4,8 @@ import axios from 'axios'
 // import React from'react'
 
 const Userprotectedwraper=({children})=>{
-      const token=localStorage.getItem('accesstoken')
+      const token=localStorage.getItem('accesstoken')?.replace(/^"|"$/g, '');
+      console.log("The great golden boy ",token)
       const navigate=useNavigate()
       const [isloading,setisloading]=useState(true)
       useEffect(()=>{
@@ -12,6 +13,7 @@ const Userprotectedwraper=({children})=>{
                   console.log("hi i am a user")
                   navigate('/loginuser')
                    } },[token])
+                   console.log(`Token inside the user protected ${token}`)
       axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/users/profile`,{
           headers:{
             Authorization: `Bearer ${token}`

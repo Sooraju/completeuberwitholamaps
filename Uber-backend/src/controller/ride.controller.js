@@ -14,6 +14,7 @@ const createRide = async (req, res, next) => {
     const { pickup, destination, vehicleType } = req.body;
     try {
         const ride = await createrideservice({ user: req.user._id, pickup, destination, vehicleType })
+        console.log(ride)
         const captions = await getcaptionintheradiusfromaddress(pickup, 400);
         const ridewithuser = await ridemodel.findOne({ _id: ride._id }).populate("user")
         captions.forEach((caption) => {

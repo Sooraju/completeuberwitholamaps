@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken'
 import captionModel from "../Model/caption.model.js"
 async function userauthenticate(req,res,next){
     const token=req.cookies.authenticate|| req.headers.authorization?.split(" ")[1]
-    console.log("i am inside the user authentication ");
    // console.log(req.headers.authorization?.split(" ")[1])
     if(!token){
         return res.status(400).json("token not present")
@@ -14,7 +13,9 @@ async function userauthenticate(req,res,next){
     if(tokencheck){
         return res.status(400).json("user loged out")
     }
+ 
     const decoded=jwt.verify(token,process.env.SecretAccessToken)
+    
    try {
     const user=await userModel.findOne({_id:decoded._id})
     req.user=user
